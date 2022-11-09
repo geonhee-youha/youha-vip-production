@@ -1,0 +1,86 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+body {
+  color: #263238;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
+}
+@media (max-width: 575px) {
+  * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+textarea,
+input {
+  -webkit-touch-callout: initial !important;
+  -webkit-user-select: initial !important;
+  -khtml-user-select: initial !important;
+  -moz-user-select: initial !important;
+  -ms-user-select: initial !important;
+  user-select: initial !important;
+}
+:root {
+  --sait: var(--android-safe-area-inset-top, env(safe-area-inset-top));
+  --saib: var(--android-safe-area-inset-bottom, env(safe-area-inset-bottom));
+  --sail: var(--android-safe-area-inset-left, env(safe-area-inset-left));
+  --sair: var(--android-safe-area-inset-right, env(safe-area-inset-right));
+}
+body,
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.ptr {
+  overflow: visible !important;
+}
+.ptr__pull-down--pull-more > div,
+.ptr__pull-down--pull-more > div > p {
+  display: none;
+}
+.MuiMenuItem-root {
+  font-family: "Pretendard !important";
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.MuiPopover-root .count {
+  display: none;
+}
+
+.react-swipeable-view-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.react-swipeable-view-container > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}

@@ -30,7 +30,20 @@ import {
   testCampaignsState,
   testEstimates,
 } from "../../../datas";
-import { ageChartData, ageChartOptions, issueChartData, issueChartOptions, keywordChartData, keywordChartOptions, sexChartData, sexChartOptions, totalChartData, totalChartOptions, trendChartData, trendChartOptions } from "../../../pages/campaign";
+import {
+  ageChartData,
+  ageChartOptions,
+  issueChartData,
+  issueChartOptions,
+  keywordChartData,
+  keywordChartOptions,
+  sexChartData,
+  sexChartOptions,
+  totalChartData,
+  totalChartOptions,
+  trendChartData,
+  trendChartOptions,
+} from "../../../pages/campaign";
 import { adSetDialogState } from "../../../recoil";
 import { theme } from "../../../themes/theme";
 import youhaBlue from "../../../themes/youhaBlue";
@@ -691,7 +704,7 @@ function Pager() {
                         })}
                       </Box>
                     </InputRow>
-                    <InputRow label="매체 활용" essential>
+                    <InputRow label="2차 콘텐츠 활용">
                       <Box sx={{ mb: -1 }}>
                         {input.medias.map((item, index) => {
                           const checked = true;
@@ -862,7 +875,11 @@ function Pager() {
                         />
                       </>
                     )}
-                    <InputRow label="핵심 키워드" value={input.keyword} />
+                    <InputRow
+                      label="핵심 키워드"
+                      essential
+                      value={input.keyword}
+                    />
                     <InputRow
                       label="셀링 포인트"
                       value={input.sellingPoint}
@@ -1016,7 +1033,16 @@ function Pager() {
                   pl: 40 + (448 - 375) / 8,
                 }}
               >
-                <Box
+                <Box sx={{
+                  ml: -1,
+                  mr: 1,
+                }}>
+                  <img src="/images/report-0.png" />
+                  <img src="/images/report-1.png" />
+                  <img src="/images/report-2.png" />
+                  <img src="/images/report-3.png" />
+                </Box>
+                {/* <Box
                   sx={{
                     p: theme.spacing(2, 2, 1, 2),
                     display: "flex",
@@ -1462,7 +1488,7 @@ function Pager() {
                       </Box>
                     </Box>
                   </Box>
-                </Box>
+                </Box> */}
               </Slide>
             </SwipeableViews>
             <SideBar

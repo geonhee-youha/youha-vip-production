@@ -299,6 +299,7 @@ export default function CampaignPopup() {
               inputRef={keywordRef}
               onKeyPress={handleKeyPressKeyword}
               label="핵심 키워드 (1개)"
+              essential
               value={input.keyword}
               onChange={handleChangeKeyword}
               onReset={handleResetKeyword}

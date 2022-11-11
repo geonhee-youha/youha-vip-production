@@ -7,6 +7,7 @@ import {
 import { Badge, Box, SxProps } from "@mui/material";
 import { blueGrey, pink } from "@mui/material/colors";
 type IconProps = {
+  ref?: any;
   name: IconName;
   prefix?: IconPrefix;
   size?: any;
@@ -19,6 +20,7 @@ type IconProps = {
   sx?: SxProps;
 };
 export default function Icon({
+  ref,
   name = "circle",
   prefix = "far",
   size = 20,

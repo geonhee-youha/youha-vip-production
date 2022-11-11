@@ -559,7 +559,7 @@ function Inner() {
                           })}
                         </Box>
                       </InputRow>
-                      <InputRow label="매체 활용" essential>
+                      <InputRow label="2차 콘텐츠 활용">
                         <Box sx={{ mb: -1 }}>
                           {input.medias.map((item, index) => {
                             const checked = true;
@@ -730,7 +730,7 @@ function Inner() {
                           />
                         </>
                       )}
-                      <InputRow label="핵심 키워드" value={input.keyword} />
+                      <InputRow label="핵심 키워드" essential value={input.keyword} />
                       <InputRow
                         label="셀링 포인트"
                         value={input.sellingPoint}

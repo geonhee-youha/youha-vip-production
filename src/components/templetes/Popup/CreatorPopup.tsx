@@ -11,7 +11,7 @@ import {
   favoritedCreatorIdsState,
   testCreators,
 } from "../../../datas";
-import { creatorPopupState } from "../../../recoil";
+import { creatorDrawerState, creatorPopupState } from "../../../recoil";
 import { theme } from "../../../themes/theme";
 import Icon from "../../atoms/Icon";
 import TextField from "../../atoms/TextInput";
@@ -30,7 +30,10 @@ export default function CreatorPopup() {
   const searchRef = useRef<any>(null);
   const [input, setInput] = useState<{ search: string }>({ search: "" });
   const [creatorPopup, setCreatorPopup] = useRecoilState(creatorPopupState);
-  const checkedCreatorIds = useRecoilValue(checkedCreatorIdsState);
+  const [creatorDrawer, setCreatorDrawer] = useRecoilState(creatorDrawerState);
+  const [checkedCreatorIds, setCheckedCreatorIds] = useRecoilState(
+    checkedCreatorIdsState
+  );
   const favoritedCreatorIds = useRecoilValue(favoritedCreatorIdsState);
   const { queryName, open } = creatorPopup;
   const [tabIndex, setTabIndex] = useState<number>(0);
@@ -49,6 +52,9 @@ export default function CreatorPopup() {
   useEffect(() => {
     handleClose();
   }, [router]);
+  useEffect(() => {
+    if (open) setCheckedCreatorIds(creatorDrawer.selectedCreatorIds);
+  }, [open]);
   const handleClose = () => {
     setCreatorPopup((prev) => {
       return {
@@ -76,6 +82,12 @@ export default function CreatorPopup() {
   };
   const handleClickConfirm = () => {
     handleClose();
+    setCreatorDrawer((prev) => {
+      return {
+        ...prev,
+        selectedCreatorIds: checkedCreatorIds,
+      };
+    });
   };
   return (
     <Dialog

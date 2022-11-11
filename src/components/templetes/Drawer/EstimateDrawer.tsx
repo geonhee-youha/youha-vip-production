@@ -57,8 +57,8 @@ export default function EstimateDrawer() {
   const confirmable =
     input.budget !== "" &&
     input.duration !== "" &&
-    input.medias.length > 0 &&
     input.purposies.length > 0 &&
+    input.keyword.length > 0 &&
     (mix === false ||
       (mix &&
         input.categories.length > 0 &&
@@ -467,92 +467,6 @@ export default function EstimateDrawer() {
                 })}
               </Box>
             </Box>
-            <Box>
-              <Typography
-                sx={{
-                  mb: 1,
-                  fontSize: 14,
-                  lineHeight: "20px",
-                  fontWeight: "700",
-                  "& span": {
-                    color: youhaBlue[500],
-                  },
-                }}
-              >
-                매체 활용 (최소 1개)
-                <span>*</span>
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  mt: 1,
-                  mb: -1,
-                }}
-              >
-                {mediaFilter.map((item, index) => {
-                  const checked = input.medias
-                    .flatMap((el) => el.value)
-                    .includes(item.value);
-                  const handleClick = () => {
-                    setEstimateDrawer((prev) => {
-                      let prevList = _.cloneDeep(prev.input.medias);
-                      if (
-                        prevList.flatMap((el) => el.value).includes(item.value)
-                      ) {
-                        prevList = _.filter(
-                          prevList,
-                          (el) => el.value !== item.value
-                        );
-                      } else {
-                        prevList = [...prevList, item];
-                      }
-                      return {
-                        ...prev,
-                        input: {
-                          ...prev.input,
-                          medias: prevList,
-                        },
-                      };
-                    });
-                  };
-                  return (
-                    <Button
-                      key={index}
-                      ref={index === 0 ? categoryRef : null}
-                      variant="outlined"
-                      color={checked ? "primary" : "secondary"}
-                      sx={{
-                        p: theme.spacing(0, 1.25),
-                        height: 32,
-                        minHeight: 32,
-                        border: `1px solid ${
-                          checked ? youhaBlue[500] : blueGrey[100]
-                        } !important`,
-                        boxShadow: `2px 2px 4px 0px rgba(0, 0, 0, ${
-                          checked ? `0.08` : `0.08`
-                        })`,
-                        borderRadius: 1,
-                        mr: 1,
-                        mb: 1,
-                      }}
-                      onClick={handleClick}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: 14,
-                          lineHeight: "20px",
-                          fontWeight: "700",
-                          color: checked ? youhaBlue[500] : blueGrey[300],
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                    </Button>
-                  );
-                })}
-              </Box>
-            </Box>
             {mix && (
               <>
                 <Box>
@@ -805,10 +719,97 @@ export default function EstimateDrawer() {
                 />
               </>
             )}
+                        <Box>
+              <Typography
+                sx={{
+                  mb: 1,
+                  fontSize: 14,
+                  lineHeight: "20px",
+                  fontWeight: "700",
+                  "& span": {
+                    color: youhaBlue[500],
+                  },
+                }}
+              >
+                2차 콘텐츠 활용
+                {/* <span>*</span> */}
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  mt: 1,
+                  mb: -1,
+                }}
+              >
+                {mediaFilter.map((item, index) => {
+                  const checked = input.medias
+                    .flatMap((el) => el.value)
+                    .includes(item.value);
+                  const handleClick = () => {
+                    setEstimateDrawer((prev) => {
+                      let prevList = _.cloneDeep(prev.input.medias);
+                      if (
+                        prevList.flatMap((el) => el.value).includes(item.value)
+                      ) {
+                        prevList = _.filter(
+                          prevList,
+                          (el) => el.value !== item.value
+                        );
+                      } else {
+                        prevList = [...prevList, item];
+                      }
+                      return {
+                        ...prev,
+                        input: {
+                          ...prev.input,
+                          medias: prevList,
+                        },
+                      };
+                    });
+                  };
+                  return (
+                    <Button
+                      key={index}
+                      ref={index === 0 ? categoryRef : null}
+                      variant="outlined"
+                      color={checked ? "primary" : "secondary"}
+                      sx={{
+                        p: theme.spacing(0, 1.25),
+                        height: 32,
+                        minHeight: 32,
+                        border: `1px solid ${
+                          checked ? youhaBlue[500] : blueGrey[100]
+                        } !important`,
+                        boxShadow: `2px 2px 4px 0px rgba(0, 0, 0, ${
+                          checked ? `0.08` : `0.08`
+                        })`,
+                        borderRadius: 1,
+                        mr: 1,
+                        mb: 1,
+                      }}
+                      onClick={handleClick}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          lineHeight: "20px",
+                          fontWeight: "700",
+                          color: checked ? youhaBlue[500] : blueGrey[300],
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                    </Button>
+                  );
+                })}
+              </Box>
+            </Box>
             <TextInput
               inputRef={keywordRef}
               onKeyPress={handleKeyPressKeyword}
               label="핵심 키워드"
+              essential
               value={input.keyword}
               onChange={handleChangeKeyword}
               onReset={handleResetKeyword}

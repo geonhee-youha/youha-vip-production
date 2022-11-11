@@ -169,7 +169,7 @@ export default function CampaignDrawer() {
             title="캠페인 선택"
             onClose={handleClickClose}
           />
-          <Stack spacing={1} sx={{ p: theme.spacing(0, 3, 2, 3) }}>
+          <Stack spacing={1} sx={{ p: theme.spacing(2, 3, 2, 3) }}>
             {testCampaigns.map((item, index) => {
               return <CampaignItem key={index} item={item} checkMode />;
             })}

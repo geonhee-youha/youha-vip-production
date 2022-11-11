@@ -187,7 +187,7 @@ export default function CreatorDrawer() {
             <Stack
               spacing={1}
               sx={{
-                p: theme.spacing(0, 3, 20, 3),
+                p: theme.spacing(2, 3, 20, 3),
                 opacity: pass ? 0.4 : 1,
                 transition: `all 0.35s ease`,
               }}
@@ -196,7 +196,7 @@ export default function CreatorDrawer() {
                 creators,
                 (creatorsEl) =>
                   _.findIndex(
-                    checkedCreatorIds,
+                    selectedCreatorIds,
                     (el) => el === creatorsEl.id
                   ) !== -1
               ).map((item, index) => (

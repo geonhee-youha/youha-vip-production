@@ -1,9 +1,11 @@
 import {
+  alpha,
   Box,
   Dialog,
   IconButton,
   Paper,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { blueGrey, pink } from "@mui/material/colors";
@@ -437,32 +439,44 @@ export default function CreatorDialog() {
                       {
                         title: "트렌드 지수",
                         value: "56점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "해당 크리에이터의 채널의 영상이 최근 얼마나 이슈화 되는지 확인하는 지수 입니다.",
                       },
                       {
                         title: "광고 기획력",
                         value: "56점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "크리에이터가 해당 광고를 얼마나 자연스럽고 거부감 없이 콘텐츠에 반영하였는지 확인하는 지수입니다. 광고 관련 경력 5년 이상의 종사자, PD, 영화감독, 작가로 구성된 유하 검증단이 평가하였습니다.",
                       },
                       {
                         title: "이행 지수",
                         value: "95점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "해당 크리에이터의 이전 광고 집행 과정에 참여한 적이 있는 대행사, MCN의 의견을 기준으로 평가하였습니다.",
                       },
                       {
                         title: "영향력 지수",
                         value: "74점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "해당 크리에이터의 최근 광고가 유튜브 채널을 제외하고 포털, SNS에 얼마나 빠르게 언급되는지 측정하는 지표입니다.",
                       },
                       {
                         title: "광고 지수",
                         value: "16점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "해당 크리에이터 채널의 광고 포화지수를 측정한 지수입니다.",
                       },
                       {
                         title: "클린 지수",
                         value: "8점",
-                        reason: '설명이 들어갈 예정입니다.'
+                        reason: "설명이 들어갈 예정입니다.",
+                        tooltip:
+                          "크리에이터와 관련된 논란이 없었는지를 기록하는 지수입니다. 해당 지수는 포털사이트, SNS 크롤링을 통해 논란의 관련 언급 여부를 통해 평가하였습니다.",
                       },
                     ].map((item, index) => (
                       <Box
@@ -474,14 +488,58 @@ export default function CreatorDialog() {
                           flex: 1,
                         }}
                       >
-                        <Typography
-                          sx={{
-                            fontSize: 14,
-                            lineHeight: "20px",
-                          }}
-                        >
-                          {item.title}
-                        </Typography>
+                        <Stack direction="row" spacing={0.5}>
+                          <Typography
+                            sx={{
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            {item.title}
+                          </Typography>
+                          <Box
+                            sx={{
+                              position: "relative",
+                              ":hover .tooltip": {
+                                opacity: 1,
+                              },
+                            }}
+                          >
+                            <Icon
+                              name="exclamation-circle"
+                              color={blueGrey[500]}
+                              size={14}
+                            />
+                            <Box
+                              sx={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                transform: `translateY(-100%)`,
+                                p: theme.spacing(1),
+                                backgroundColor: alpha(blueGrey[800], 1),
+                                borderRadius: 0.5,
+                                maxWidth: 200,
+                                display: "flex",
+                                alignItems: "center",
+                                width: 'max-content',
+                                opacity: 0,
+                                transition: `opacity 0.35s ease`
+                              }}
+                              className="tooltip"
+                            >
+                              <Typography
+                                sx={{
+                                  fontSize: 12,
+                                  lineHeight: "16px",
+                                  color: "#ffffff",
+                                }}
+                              >
+                                {item.tooltip}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Stack>
                         <Typography
                           sx={{
                             fontSize: 16,

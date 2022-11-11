@@ -263,6 +263,7 @@ export default function CampaignDialog() {
                     <TextInput
                       inputRef={keywordRef}
                       label="핵심 키워드 (1개)"
+                      essential
                       value={input.keyword}
                       type="text"
                       disabled={disabled}

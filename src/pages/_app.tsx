@@ -8,7 +8,7 @@ import { fas } from "@fortawesome/pro-solid-svg-icons";
 import { fad } from "@fortawesome/pro-duotone-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { RecoilRoot } from "recoil";
-import "../styles/main.css";
+import "../styles/index.css";
 import "../styles/reset.ts";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -34,27 +34,10 @@ import {
   PieController,
   DoughnutController,
 } from "chart.js";
-import { blueGrey } from "@mui/material/colors";
-import { Box, Paper, Stack } from "@mui/material";
-import MainTab from "../components/templetes/MainTab";
-import AlarmDrawer from "../components/templetes/Drawer/AlarmDrawer";
 import _ from "lodash";
-import { pages } from "../constants";
-import CampaignDrawer from "../components/templetes/Drawer/CampaignDrawer";
-import SearchDrawer from "../components/templetes/Drawer/SearchDrawer";
-import AlertDialog from "../components/templetes/Dialog/AlertDialog";
-import BackDrop from "../components/atoms/Backdrop";
-import CampaignPopup from "../components/templetes/Popup/CampaignPopup";
-import CreatorPopup from "../components/templetes/Popup/CreatorPopup";
-import CampaignDialog from "../components/templetes/Dialog/CampaignDialog";
-import CreatorDrawer from "../components/templetes/Drawer/CreatorDrawer";
-import EstimateConfirmDialog from "../components/templetes/Dialog/EstimateConfirmDialog";
-import AdDialog from "../components/templetes/Dialog/AdDialog";
-import EstimateDrawer from "../components/templetes/Drawer/EstimateDrawer";
-import CreatorDialog from "../components/templetes/Dialog/CreatorDialog";
-import AdSetDialog from "../components/templetes/Dialog/AdSetDialog";
-import PlaylistDialog from "../components/templetes/Dialog/PlaylistDialog";
-import EstimateDialog from "../components/templetes/Dialog/EstimateDialog";
+import GlobalHeader from "../components/organisms/GlobalHeader";
+import LocalNav from "../components/molecules/LocalNav";
+import GlobalFooter from "../components/organisms/GlobalFooter";
 ChartJS.register(
   LineController,
   BarController,
@@ -85,9 +68,6 @@ declare global {
 }
 function MyApp(props: MyAppProps) {
   const router = useRouter();
-  const currentPathName = `/${router.pathname.split("?")[0].split("/")[1]}`;
-  const inMainTabs =
-    _.findIndex(pages, (el) => el.pathName === currentPathName) !== -1;
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
@@ -96,14 +76,13 @@ function MyApp(props: MyAppProps) {
         <title>유튜버 찾을 땐, 유하</title>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="keywords" content="유하, 유튜브, 유튜버, 광고" />
         <meta
           name="description"
           content="유하에서 국내 모든 유튜버에게 광고를 제안하고 답장을 100% 받아보세요. 광고주와 유튜버의 인플루언서 마케팅 커뮤니티 (브랜디드 콘텐츠, PPL 등)"
         />
-        ㄴ
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="유하" />
         <meta property="og:title" content="유튜버 찾을 땐, 유하" />
@@ -240,93 +219,10 @@ function MyApp(props: MyAppProps) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Global styles={reset} />
-          {!inMainTabs ? (
-            <Component {...pageProps} key={router.route} />
-          ) : (
-            <>
-              <BackDrop />
-              <Box
-                sx={{
-                  position: "relative",
-                  m: `0 auto`,
-                  width: 1600,
-                  height: "100%",
-                  // overflow: "auto",
-                }}
-                className="GlobalContainer"
-              >
-                <MainTab />
-                <CampaignDrawer />
-                <CreatorDrawer />
-                <EstimateDrawer />
-                {/* <CreatorDrawer />
-              <CampaignDrawer />
-              <CampaignDialog />
-              <CreatorDialog />
-              <EstimateConfirmDialog />
-              <AdDialog />
-              <PlanDialog />
-              <EstimateInputDialog />
-              <AlarmDrawer />
-              <SearchDrawer /> */}
-                <Stack
-                  spacing={2}
-                  sx={{
-                    position: "absolute",
-                    top: 24,
-                    bottom: 24,
-                    right: 24,
-                    left: 376 + 24 + 16,
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Paper
-                    elevation={4}
-                    sx={{
-                      height: 72,
-                      borderRadius: 1,
-                      boxShadow: `4px 4px 8px 4px rgba(0, 0, 0, 0.08)`,
-                      // border: `1px solid ${blueGrey[300]}`
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    배너
-                  </Paper>
-                  <Box
-                    sx={{
-                      position: "relative",
-                      flex: 1,
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                      }}
-                    >
-                      <Component {...pageProps} key={router.route} />
-                    </Box>
-                  </Box>
-                </Stack>
-                <CampaignPopup />
-                <CreatorPopup />
-                <EstimateConfirmDialog />
-                <CampaignDialog />
-                <CreatorDialog />
-                <PlaylistDialog />
-                <AlertDialog />
-                <AdDialog />
-                <AdSetDialog />
-                <EstimateDialog />
-              </Box>
-            </>
-          )}
+          <Component {...pageProps} key={router.route} />
+          {/* <LocalNav />
+          <GlobalHeader />
+          <GlobalFooter /> */}
         </ThemeProvider>
       </RecoilRoot>
     </CacheProvider>

@@ -4,69 +4,73 @@ import {
   IconName,
   IconPrefix,
 } from "@fortawesome/fontawesome-svg-core";
-import { Badge, Box, SxProps } from "@mui/material";
-import { blueGrey, pink } from "@mui/material/colors";
+import { Badge, SxProps } from "@mui/material";
+import { red } from "@mui/material/colors";
+import { MouseEventHandler } from "react";
+import newGrey from "../../core/colors/newGrey";
+import newRed from "../../core/colors/newRed";
+
 type IconProps = {
-  ref?: any;
   name: IconName;
   prefix?: IconPrefix;
+  badgeCount?: number;
   size?: any;
   padding?: number;
-  badgeCount?: number;
-  badgeVariant?: "dot" | "standard";
   className?: string;
   color?: string;
-  onClick?: (e?: any) => void;
+  onClick?: MouseEventHandler<SVGSVGElement>;
   sx?: SxProps;
 };
+
 export default function Icon({
-  ref,
   name = "circle",
   prefix = "far",
-  size = 20,
-  padding = 2,
   badgeCount,
-  badgeVariant,
+  size = 24,
+  padding = 2,
   className,
-  color = blueGrey[900],
+  color = newGrey[900],
   onClick,
   sx,
 }: IconProps) {
-  const invisible = typeof badgeCount !== "number";
   const icon: IconLookup = { prefix: prefix, iconName: name };
+  const badgeInvisible = badgeCount === undefined;
+  const badgeColor = newRed[400];
   return (
-    <Box
+    <Badge
+      max={999}
+      invisible={badgeInvisible}
+      badgeContent={badgeCount}
+      variant="dot"
+      overlap="circular"
+      color="error"
       sx={{
         color: color,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minWidth: `${size + padding * 2}px !important`,
+        width: `${size}px !important`,
         padding: `${padding}px !important`,
-        fontSize: `${size / 2}px !important`,
+        fontSize: `${(size - 4) / 2}px !important`,
+        transition: `all 0.35s ease`,
         ...sx,
+        "& .MuiBadge-badge": {
+          width: 6,
+          height: 6,
+          minWidth: 4,
+          backgroundColor: badgeColor,
+          fontSize: 12,
+          lineHeight: "16px",
+          fontWeight: "700",
+        },
       }}
-      onClick={onClick}
-      className="Icon"
     >
-      <Badge
-        max={999}
-        invisible={invisible}
-        badgeContent={badgeCount}
-        color="error"
-        variant={badgeVariant}
-        sx={{
-          "& .MuiBadge-badge": {
-            width: 20,
-            height: 20,
-            backgroundColor: pink[500],
-            fontSize: 12,
-            fontWeight: "700",
-          },
-        }}
-      >
-        <FontAwesomeIcon icon={icon} size="2x" className={className} />
-      </Badge>
-    </Box>
+      <FontAwesomeIcon
+        icon={icon}
+        size="2x"
+        className={className}
+        onClick={onClick}
+      />
+    </Badge>
   );
 }
